@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./css/estilos.css">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+        integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <title> Juego de cartas </title>
+</head>
+
+<header>
+   
+    <div class="row" >
+    <img src="./img/cartas.png" class="col-lg-2 col-sm-2"> 
+    <h1 id="texto" class="col-lg-10 col-sm-10">  JUEGO DE CARTAS</h1>
+    </div>
+</header>
+<br>
+
+<body id="cuerpo">
+    <div class="container">
+        <div class="col-xs-12 col-sm-6" id="cantidadCartas">
+
+            <button type="submit" value="" id="As-de-diamantes" >
+                <img src="./img/1.png " >
+            </button>
+
+            <button type="submit" value="" id="dos-de-diamantes">
+                <img src="./img/2.png">
+            </button>
+
+            <button type="submit" value="" id="tres-de-corazones">
+                <img src="./img/3.png" >
+            </button>
+
+            <button type="submit" value="" id="cuatro-de-corazones">
+                <img src="./img/4.png">
+            </button>
+
+            <button type="submit" value="" id="cinco-de-corazones">
+                <img src="./img/5.png">
+            </button>
+
+            <button type="submit" value="" id="seis-de-trebol">
+                <img src="./img/6.png" >
+            </button>
+
+            <button type="submit" value="" id="siete-de-diamantes">
+                <img src="./img/7.png">
+            </button>
+
+            <button type="submit" value="" id="ocho-de-trebol">
+                <img src="./img/8.png">
+            </button>
+
+            <button type="submit" value="" id="nueve-de-diamantes">
+                <img src="./img/9.png">
+            </button>
+
+            <button type="submit" value="" id="diez-de-corazones">
+                <img src="./img/10.png">
+            </button>
+
+            <button type="submit" value="" id="j">
+                <img src="./img/11.png">
+            </button>
+
+            <button type="submit" value="" id="q">
+                <img src="./img/12.png">
+            </button>
+
+            <button type="submit" value="" id="k">
+                <img src="./img/13.png">
+            </button>
+        </div>
+
+        <div class="col-xs-12 col-sm-6">
+            <section id="div"></section>
+            <section>
+                <h2> Listado de cartas</h2>
+                <br>
+                <table id="tabla" class="table">
+                    <thead class="table-dark">
+                        <tr>
+                            <th> Numero </th>
+                            <th> Carta </th>
+                            <th> Cantidad </th>
+                        </tr>
+                    </thead>
+                </table>
+                <button type="submit" id="1erBoton" class="btn btn-danger"> Cargar cartas </button>
+                <br>
+                <br>
+            </section>
+
+
+
+            <form id="nueva-carta">
+                <div class="form-group">
+                    <h2> Agregar Cartas</h2>
+                    <br>
+                    <div class="row">
+                        <label class="col-lg-3 col-xs-1"></label>
+                        <label class="col-lg-3 col-xs-5"> Numero: </label>
+                        <input class="col-lg-3 col-xs-5" type="text" name="form-control" id="number">
+                        <label class="col-lg-3 col-xs-1"></label>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <label class="col-lg-3 col-xs-1"></label>
+                        <label class="col-lg-3 col-xs-5"> Carta: </label>
+                        <input class="col-lg-3 col-xs-5" type="text" name="form-control" id="textoCarta">
+                        <label class="col-lg-3 col-xs-1"></label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <label class="col-lg-5 col-xs-3"></label>
+                    <input class="col-lg-2 col-xs-6 btn btn-danger" type="button" value="Guardar" id="nuevos">
+                    <label class="col-lg-5 col-xs-3"></label>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <script>
+        //let local = JSON.parse(localStorage.getItem("datos"));
+        function conectar() {
+            fetch('cartas.json')
+                .then(res => res.json())
+                .then(data => llenarTabla(data)
+                )
+        }
+
+        function llenarTabla(data) {
+            localStorage.setItem("datos", JSON.stringify(data));
+            const tabla = document.getElementById("tabla");
+
+            for (let i in data) {
+                const tr = document.createElement('tr')
+                const tdNumero = document.createElement('td')
+                tdNumero.textContent = data[i].numero
+                tr.appendChild(tdNumero)
+                const tdCarta = document.createElement('td')
+                tdCarta.textContent = data[i].carta
+                tr.appendChild(tdCarta)
+                const tdCantidad = document.createElement('td')
+                tdCantidad.textContent = data[i].cantidad
+                tr.appendChild(tdCantidad)
+                tabla.appendChild(tr)
+            }
+        }
+
+        document.getElementById("1erBoton").onclick = conectar;
+
+
+        // Agregar las cartas del formulario
+        function conectarFormulario() {
+            fetch('cartas.json')
+                .then(res => res.json())
+                .then(data => agregarTabla(data)
+                )
+        }
+        //   const tabla = document.getElementById("tabla");
+        function agregarTabla(data) {
+
+            let nuevasCartas = localStorage.getItem("datos")
+            nuevasCartas = JSON.parse(nuevasCartas)
+            const tr = document.createElement('tr')
+            const tdNumero = document.createElement('td')
+            const numeroTd = document.getElementById("number").value
+            tdNumero.textContent = numeroTd
+            tr.appendChild(tdNumero)
+            const tdCarta = document.createElement('td')
+            const cartaTd = document.getElementById("textoCarta").value
+            tdCarta.textContent = cartaTd
+            tr.appendChild(tdCarta)
+            const tdCantidad = document.createElement('td')
+            tdCantidad.textContent = 0;
+            tr.appendChild(tdCantidad)
+            tabla.appendChild(tr)
+            var nuevoCarta = { numero: numeroTd, carta: cartaTd, cantidad: '0' }
+            nuevasCartas.push(nuevoCarta)
+            localStorage.setItem("datos", JSON.stringify(nuevasCartas))
+        }
+
+        document.getElementById("nuevos").onclick = conectarFormulario;
+
+
+        // Aumentar la cantidad de una carta
+        function aumentarCarta() {
+            fetch('cartas.json')
+                .then(res => res.json())
+                .then(data => validarCarta(data)
+                )
+        }
+
+        function validarCarta(data) {
+            let validacion = localStorage.getItem("datos")
+            let cartaData = JSON.parse(localStorage.getItem("datos"))
+            
+            const tabla = document.getElementById("tabla");
+
+            
+            localStorage.setItem("datos", JSON.stringify(data));
+            //console.log(data)
+        }
+
+       // document.getElementById("nuevos").onclick = aumentarCarta;
+
+    </script>
+
+</body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+    integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+    crossorigin="anonymous"></script>
+
+<footer>
+
+</footer>
+
+</html>

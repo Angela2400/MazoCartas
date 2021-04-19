@@ -1,0 +1,27 @@
+[ 
+    {
+        "numero": "1",
+        "carta": "As de diamantes",
+        "cantidad": "0"
+    },
+    {
+        "numero": "2",
+        "carta": "2 de diamantes",
+        "cantidad": "0"
+    },
+    {
+        "numero": "3",
+        "carta": "3 de corazones",
+        "cantidad": "0"
+    },
+    {
+        "numero": "4",
+        "carta": "4 de corazones",
+        "cantidad": "0"
+    },
+    {
+        "numero": "5",
+        "carta": "5 de corazones",
+        "cantidad": "0"
+    }
+]

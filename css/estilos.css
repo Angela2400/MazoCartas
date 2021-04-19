@@ -1,0 +1,36 @@
+img{
+    height: 150px;
+    width:  120px;
+}
+
+.picture img{
+    width: 50%;
+}
+
+td{
+    text-align: center;
+}
+
+th{
+    text-align: center;
+}
+
+#cuerpo{
+    background-color:#F8E0E0;
+}
+
+#nombreUsuario{
+    width: 40%;
+}
+
+#primerDiv{
+    background-color:whitesmoke;
+}
+
+h2{
+    text-align: center;
+}
+
+#texto{
+    padding-top: 32px;
+}
